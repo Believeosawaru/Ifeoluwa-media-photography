@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <title>UPLOAD PHOTOS AND VIDEOS</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Scribble&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+    <meta charset="UTF-8">
+  </head> 
+  
+  <body>
+    <div class="header-div">
+        <h4>UPLOAD MEDIA FILES</h4>
+    </div>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="myFiles" name="file" accept="image/*, video/*" multiple />
+        <button type="submit">Save</button>
+    </form>
+    <h2></h2>
+    <h3></h3>
+    <script>
+        const form = document.getElementById('uploadForm');
+        
+        const sendFiles = async () => {
+            // Object
+            const myFiles = document.getElementById('myFiles').files;
+
+            const formData = new FormData();
+
+            Object.keys(myFiles).forEach((key) => {
+                formData.append(myFiles.item(key).name, myFiles.item(key))
+            });
+
+            const response = await fetch('http://localhost:3000/upload', {
+                method: 'POST', 
+                body: formData
+            });
+
+            const json = await response.json();
+
+            const h2 = document.querySelector('h2');
+            h2.textContent = `Status: ${json?.status}`
+
+            const h3 = document.querySelector('h3');
+            h3.textContent = json?.message
+
+            console.log(json);
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            sendFiles();
+        })
+    </script>
+ </body>
+</html>

@@ -317,3 +317,209 @@ footer h4 {
 .channels div {
     margin: 10px 0px;
 }
+/* admin dashboard */
+
+.update-div {
+    border: 1px solid #222;
+    width: 100%;
+    margin: 10px 25px;
+    background: #0a0a0a;
+    opacity: 0.9;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 6px;
+    padding-block: 80px;
+    z-index: 1000000;
+    box-shadow: inset;
+    text-decoration: underline;
+    line-height: 2em;
+    font-weight: 300;
+}
+.update-div:hover {
+    cursor: pointer;
+}
+.dashboard-img {
+    width: 100%;
+    position: absolute;
+    top: 10%;
+    z-index: 100;
+}
+input {
+    margin: 15px;
+}
+form button {
+    background: rgb(214, 170, 47);
+    padding: 2px 10px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+}
+/* MEDIA QUERIES */
+@media screen and (min-width: 1200px) {
+    .social-logos a {
+        width: 2%;
+        margin: 5px;
+        border-radius: 20px;
+    }
+    .social-logos img {
+        width: 100%;
+        border: 1px solid #555;
+    }
+    .camera-img {
+        width: 30%;
+        height: 25vw;
+        margin: 20px;
+        border-radius: 5px;
+        border: 1px solid black;
+    }
+    .header-div {
+        margin: 15px 270px 15px 270px;
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 8px;
+        text-align: center;
+    }
+    .header-div h4 {
+        font-family: "Poppins", sans-serif;
+        /* font-family: "Oswald", sans-serif; */
+        font-size: 17px;
+    }
+    .pp {
+        font-weight: 350;
+        font-family: "Poppins", sans-serif;
+        font-size: 14px;
+        background: #0a0a0a;
+        padding: 4px;
+        border-radius: 6px;
+        margin: 0px 270px 0px 270px;
+        font-weight: 200;
+    }
+    .text-1 {
+        font-size: 35px;
+    }
+    .text-2 {
+        font-size: 45px;
+    }
+    .sec-services {
+        margin: 20px 270px;
+    }
+    section {
+        background: #0a0a0a;
+        margin: 50px;
+        padding: 15px 10px;
+        border-radius: 5px;
+        border: 1px solid #333;
+    }
+    section h4 {
+        font-family: "Poppins", sans-serif;
+        font-size: 20px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .mini-gallery {
+        background: #0a0a0a;
+        border: 1px solid #333;
+        margin: 20px 20px 20px 0px;
+        padding: 10px;
+        border-radius: 5px;
+        position: relative;
+        width: 300px;
+    }
+    .mini-gallery p {
+        margin: 10px;
+        font-family: "Poppins", sans-serif;
+        font-size: 15px;
+        text-align: center;
+    }
+    .gallery-text {
+        font-size: 20px;
+    }
+    .bottom {
+        line-height: 3em;
+        width: 600px;
+        height: 240px;
+        margin: 50px 0px;
+    }
+    .cam-about {
+        margin: 30px 270px;
+        display: flex;
+    }
+    footer {
+        padding: 10px;
+        margin: 20px 270px;
+        border: 1px solid #222;
+        font-family: "Poppins", sans-serif;
+        border-radius: 6px;
+        line-height: 2.3em;
+        font-size: 14px;
+        background: #0a0a0a;
+    }
+    footer h4 {
+        text-align: center;
+        margin-bottom: 8px;
+        font-size: 20px;
+    }
+    .handles-img {
+        width: 3%;
+        border-radius: 5px;
+    }
+    .select-container {
+        display: grid;
+        grid-template-columns: auto auto;
+        margin: 10px 270px;
+    }
+    .select-container p {
+        font-size: 12px;
+        font-weight: 700;
+    }
+    .select-img {
+        width: 100%;
+        height: 50vh;
+        border-radius: 3px;
+    }
+    .p-absolute {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        background: rgba(0, 0, 0, .9);
+        border: 1px solid black;
+        z-index: 1000000;
+        font-size: 13px;
+        padding: 8px;
+        width: 92%;
+    }
+    .others-btn {
+        margin: 10px 280px;
+    }
+    .select-service {
+        border: 1px solid #222;
+        font-family: "Poppins", sans-serif;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 6px;
+        text-align: center;
+        position: relative;
+    }
+    .channels {
+        font-family: "Poppins", sans-serif;
+        padding: 10px 15px 10px 10px;
+        background: #0a0a0a;
+        margin: 15px 270px;
+        font-size: 15px;
+        border-radius: 7px;
+        border: 1px solid #222;
+    }
+    .channels h4 {
+        margin: 20px 0px;
+    }
+    .channels button {
+        background: rgb(214, 170, 47);
+        padding: 3px 20px;
+        border-radius: 3px;
+        border: none;
+        margin: 5px 0px;
+        font-weight: bold;
+    }
+}

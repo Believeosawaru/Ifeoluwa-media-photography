@@ -87,3 +87,36 @@ a {
     font-family: "Poppins", sans-serif;
     font-weight: bold;
 }
+@media screen and (min-width: 1200px) {
+    .header-div {
+        margin: 15px 270px 15px 270px;
+        background: #0a0a0a;
+        border-radius: 8px;
+        padding: 8px;
+        text-align: center;
+    }
+    .header-div h4 {
+        font-family: "Poppins", sans-serif;
+        /* font-family: "Oswald", sans-serif; */
+        font-size: 17px;
+    }
+    .pp {
+        font-weight: 350;
+        font-family: "Poppins", sans-serif;
+        font-size: 14px;
+        background: #0a0a0a;
+        padding: 4px;
+        border-radius: 6px;
+        margin: 0px 270px 0px 270px;
+        font-weight: 200;
+    }
+    .frame {
+        background: #222;
+        margin: 20px 270px;
+        padding: 10px;
+    }
+    .frame img {
+        width: 100%;
+        /* height: 100vw; */
+    }
+}
