@@ -51,7 +51,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
 app.get('/', (req, res) => {
-   res.sendFile(path.join(__dirname, 'gallery.html'))
+   res.sendFile(path.join(__dirname, 'index.html'))
 });
 
 app.get('/creative-image', (req, res) => {
