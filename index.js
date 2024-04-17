@@ -26,10 +26,6 @@ const storage = multer.diskStorage({
    });
    await newFile.save();
    res.render('success');
-
-   setTimeout(() => {
-      res.redirect('admin-page')
-   }, 1000);
  });
 
  mongoose.connect('mongodb+srv://believeosawaru2:ifeoluwa2@cluster0.lbmrifo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
