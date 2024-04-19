@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <title>VIEW OUR TRADITIONAL POTRAIT GALLERY</title>
+  <title>VIEW OUR EVENT COVERAGE GALLERY</title>
   <link rel="stylesheet" href="gallery.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,13 +12,31 @@
   </head>
   <body>
     <div class="header-div">
-        <h4>IFE'S GALLERY</h4>
+        <h4>TRADITIONAL PHOTOGRAPHY</h4>
     </div>
     <p class="pp">View our collection below</p>
-    <div class="gallery-div">
-        
+    <div class="event-gallery">
+      <div class="centered imgs">
+         <div class="frame frame-8">
+         </div>
+      </div>
     </div>
     <p class="the-end">~ END OF GALLERY ~</p>
-    <script src="gallery.js"></script>
+    <div id="event-images"></div>
+    <script>
+     fetch('/display-all-traditional')
+       .then(response => response.json())
+       .then(imagesArray => {
+        let accum = '';
+         const imagesFrame = document.querySelector('.frame-8');
+         imagesArray.forEach(imageData => {
+           const img = document.createElement('img');
+           img.src = `data:${imageData.contentType};base64,${imageData.data}`;
+           img.alt = imageData.filename;
+           imagesFrame.appendChild(img);
+         });
+       })
+       .catch(error => console.error(error));
+    </script>
   </body>
   </html>

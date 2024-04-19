@@ -2,7 +2,9 @@ const express = require('express');
 const multer = require('multer');
 const mongoose = require('mongoose');
 const path = require('path');
-const fs = require('fs')
+const fs = require('fs');
+const { rejects } = require('assert');
+const router = express.Router()
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,8 +20,11 @@ const storage = multer.diskStorage({
 
  const upload = multer({ storage: storage });
 
- app.post('/upload', upload.single('file'), async (req, res) => {
-   const newFile = new File({
+
+ // forms validation
+
+ app.post('/upload-studio', upload.single('file'), async (req, res) => {
+   const newFile = new StudioFile({
      filename: req.file.filename,
      contentType: req.file.mimetype,
      data: fs.readFileSync(req.file.path)
@@ -28,19 +33,370 @@ const storage = multer.diskStorage({
    res.render('success');
  });
 
- mongoose.connect('mongodb+srv://believeosawaru2:ifeoluwa2@cluster0.lbmrifo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+ app.post('/upload-event', upload.single('file'), async (req, res) => {
+   const newFile = new EventFile({
+     filename: req.file.filename,
+     contentType: req.file.mimetype,
+     data: fs.readFileSync(req.file.path)
+   });
+   await newFile.save();
+   res.render('success');
+ });
+
+ app.post('/upload-traditional', upload.single('file'), async (req, res) => {
+   const newFile = new TraditionalFile({
+     filename: req.file.filename,
+     contentType: req.file.mimetype,
+     data: fs.readFileSync(req.file.path)
+   });
+   await newFile.save();
+   res.render('success');
+ });
+
+ app.post('/upload-creative', upload.single('file'), async (req, res) => {
+   const newFile = new CreativeFile({
+     filename: req.file.filename,
+     contentType: req.file.mimetype,
+     data: fs.readFileSync(req.file.path)
+   });
+   await newFile.save();
+   res.render('success');
+ });
+
+ app.post('/upload-lifestyle', upload.single('file'), async (req, res) => {
+   const newFile = new LifestyleFile({
+     filename: req.file.filename,
+     contentType: req.file.mimetype,
+     data: fs.readFileSync(req.file.path)
+   });
+   await newFile.save();
+   res.render('success');
+ });
+
+ app.post('/upload-product', upload.single('file'), async (req, res) => {
+   const newFile = new ProductFile({
+     filename: req.file.filename,
+     contentType: req.file.mimetype,
+     data: fs.readFileSync(req.file.path)
+   });
+   await newFile.save();
+   res.render('success');
+ });
+
+//  app.post('/upload-frames', upload.single('file'), async (req, res) => {
+//    const newFile = new FramesFile({
+//      filename: req.file.filename,
+//      contentType: req.file.mimetype,
+//      data: fs.readFileSync(req.file.path)
+//    });
+//    await newFile.save();
+//    res.render('success');
+//  });
+
+app.post('/upload-frames', upload.array('files', 10), async (req, res) => {
+   const files = req.files;
+
+   for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+
+      const newFile = new FramesFile({
+         filename: req.file.filename,
+         contentType: req.file.mimetype,
+         data: fs.readFileSync(req.file.path)
+       });
+       await newFile.save();
+       res.render('success');
+     }
+   })
+
+ app.post('/upload-kids', upload.single('file'), async (req, res) => {
+   const newFile = new KidsFile({
+     filename: req.file.filename,
+     contentType: req.file.mimetype,
+     data: fs.readFileSync(req.file.path)
+   });
+   await newFile.save();
+   res.render('success');
+ });
+
+ app.get('/display-all-events', async (req, res) => {
+   try {
+      // retrieve files from db
+      const eventFiles = await EventFile.find({});
+
+      // check if there are any event files
+      if (eventFiles.length === 0) {
+         return res.status(404).send('no images found in the media storage');
+      }
+
+      // create an array to store images
+      const imagesArray = [];
+
+          // Iterate over each event file
+      eventFiles.forEach(eventFile => {
+      // Push image data to the array
+      imagesArray.push({
+        filename: eventFile.filename,
+        contentType: eventFile.contentType,
+        data: eventFile.data.toString('base64') // Convert Buffer to base64 string
+      });
+   });
+
+    // Send the array of image data to the client
+    res.json(imagesArray);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+
+ });
+
+ app.get('/display-all-studio', async (req, res) => {
+   try {
+      // retrieve files from db
+      const studioFiles = await StudioFile.find({});
+
+      // check if there are any event files
+      if (studioFiles.length === 0) {
+         return res.status(404).send('no images found in the media storage');
+      }
+
+      // create an array to store images
+      const imagesArray = [];
+
+          // Iterate over each event file
+      studioFiles.forEach(eventFile => {
+      // Push image data to the array
+      imagesArray.push({
+        filename: eventFile.filename,
+        contentType: eventFile.contentType,
+        data: eventFile.data.toString('base64') // Convert Buffer to base64 string
+      });
+   });
+
+    // Send the array of image data to the client
+    res.json(imagesArray);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+
+ });
+
+ app.get('/display-all-traditional', async (req, res) => {
+   try {
+      // retrieve files from db
+      const traditionalFiles = await TraditionalFile.find({});
+
+      // check if there are any event files
+      if (traditionalFiles.length === 0) {
+         return res.status(404).send('no images found in the media storage');
+      }
+
+      // create an array to store images
+      const imagesArray = [];
+
+          // Iterate over each event file
+      traditionalFiles.forEach(eventFile => {
+      // Push image data to the array
+      imagesArray.push({
+        filename: eventFile.filename,
+        contentType: eventFile.contentType,
+        data: eventFile.data.toString('base64') // Convert Buffer to base64 string
+      });
+   });
+
+    // Send the array of image data to the client
+    res.json(imagesArray);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+
+ });
+
+ app.get('/display-all-creative', async (req, res) => {
+   try {
+      // retrieve files from db
+      const creativeFiles = await CreativeFile.find({});
+
+      // check if there are any event files
+      if (creativeFiles.length === 0) {
+        return
+      }
+
+      // create an array to store images
+      const imagesArray = [];
+
+          // Iterate over each event file
+      creativeFiles.forEach(eventFile => {
+      // Push image data to the array
+      imagesArray.push({
+        filename: eventFile.filename,
+        contentType: eventFile.contentType,
+        data: eventFile.data.toString('base64') // Convert Buffer to base64 string
+      });
+   });
+
+    // Send the array of image data to the client
+    res.json(imagesArray);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+
+ });
+
+ app.get('/display-all-lifestyle', async (req, res) => {
+   try {
+      // retrieve files from db
+      const lifestyleFiles = await LifestyleFile.find({});
+
+      // check if there are any event files
+      if (lifestyleFiles.length === 0) {
+         return
+      }
+
+      // create an array to store images
+      const imagesArray = [];
+
+          // Iterate over each event file
+      lifestyleFiles.forEach(eventFile => {
+      // Push image data to the array
+      imagesArray.push({
+        filename: eventFile.filename,
+        contentType: eventFile.contentType,
+        data: eventFile.data.toString('base64') // Convert Buffer to base64 string
+      });
+   });
+
+    // Send the array of image data to the client
+    res.json(imagesArray);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+
+ });
+
+ app.get('/display-all-product', async (req, res) => {
+   try {
+      // retrieve files from db
+      const productFiles = await ProductFile.find({});
+
+      // check if there are any event files
+      if (productFiles.length === 0) {
+         return
+      }
+
+      // create an array to store images
+      const imagesArray = [];
+
+          // Iterate over each event file
+      productFiles.forEach(eventFile => {
+      // Push image data to the array
+      imagesArray.push({
+        filename: eventFile.filename,
+        contentType: eventFile.contentType,
+        data: eventFile.data.toString('base64') // Convert Buffer to base64 string
+      });
+   });
+
+    // Send the array of image data to the client
+    res.json(imagesArray);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+
+ });
+
+ app.get('/display-all-frames', async (req, res) => {
+   try {
+      // retrieve files from db
+      const framesFiles = await FramesFile.find({});
+
+      // check if there are any event files
+      if (framesFiles.length === 0) {
+         return 
+      }
+
+      // create an array to store images
+      const imagesArray = [];
+
+          // Iterate over each event file
+      framesFiles.forEach(eventFile => {
+      // Push image data to the array
+      imagesArray.push({
+        filename: eventFile.filename,
+        contentType: eventFile.contentType,
+        data: eventFile.data.toString('base64') // Convert Buffer to base64 string
+      });
+   });
+
+    // Send the array of image data to the client
+    res.json(imagesArray);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+
+ });
+
+ app.get('/display-all-kids', async (req, res) => {
+   try {
+      // retrieve files from db
+      const kidsFiles = await KidsFile.find({});
+
+      // check if there are any event files
+      if (kidsFiles.length === 0) {
+         return
+      }
+
+      // create an array to store images
+      const imagesArray = [];
+
+          // Iterate over each event file
+      kidsFiles.forEach(eventFile => {
+      // Push image data to the array
+      imagesArray.push({
+        filename: eventFile.filename,
+        contentType: eventFile.contentType,
+        data: eventFile.data.toString('base64') // Convert Buffer to base64 string
+      });
+   });
+
+    // Send the array of image data to the client
+    res.json(imagesArray);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+
+ });
+
+
+ mongoose.connect('mongodb+srv://believeosawaru2:ife@cluster0.klrtwxd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
    console.log('connected to database');
 })
 .catch((err) => {
    console.error('error connecting to db');
-})
+});
 
-const fileSchema = new mongoose.Schema({
+ const Schema = new mongoose.Schema({
    filename: String,
    contentType: String,
    data: Buffer
  });
- const File = mongoose.model('File', fileSchema);
+
+ const StudioFile = mongoose.model('studio', Schema);
+ const EventFile = mongoose.model('event', Schema);
+ const TraditionalFile = mongoose.model('traditional', Schema);
+ const CreativeFile = mongoose.model('creative', Schema);
+ const LifestyleFile = mongoose.model('lifestyle', Schema);
+ const ProductFile = mongoose.model('product', Schema);
+ const FramesFile = mongoose.model('frames', Schema);
+ const KidsFile = mongoose.model('kids', Schema);
 
  app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')));
@@ -83,7 +439,7 @@ app.get('/product-image', (req, res) => {
 });
 
 app.get('/traditional-potrait', (req, res) => {
-   res.sendFile(path.join(__dirname, 'frames-image.html'))
+   res.sendFile(path.join(__dirname, 'traditional-potrait.html'))
 });
 
 app.get('/booking', (req, res) => {
@@ -116,6 +472,34 @@ app.get('/delete', (req, res) => {
 
 app.get('/studio-upload', (req, res) => {
    res.render('studio-upload');
+});
+
+app.get('/event-upload', (req, res) => {
+   res.render('event-upload');
+});
+
+app.get('/traditional-upload', (req, res) => {
+   res.render('traditional-upload');
+});
+
+app.get('/creative-upload', (req, res) => {
+   res.render('creative-upload');
+});
+
+app.get('/lifestyle-upload', (req, res) => {
+   res.render('lifestyle-upload');
+});
+
+app.get('/product-upload', (req, res) => {
+   res.render('product-upload');
+});
+
+app.get('/frames-upload', (req, res) => {
+   res.render('frames-upload');
+});
+
+app.get('/kids-upload', (req, res) => {
+   res.render('kids-upload');
 });
 // end of routes
 

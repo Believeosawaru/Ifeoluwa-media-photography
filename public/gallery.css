@@ -44,12 +44,12 @@ a {
     justify-content: center;
 }
 .frame {
-    background: #222;
-    margin: 10px 20px 0px 20px;
-    padding: 10px;
+    margin: 15px 20px 0px 20px;
 }
 .frame img {
     width: 100%;
+    background: #222;
+    padding: 10px;
     /* height: 100vw; */
 }
 .frame img:hover {
@@ -111,12 +111,11 @@ a {
         font-weight: 200;
     }
     .frame {
-        background: #222;
         margin: 20px 270px;
-        padding: 10px;
     }
     .frame img {
         width: 100%;
+        padding: 10px;
         /* height: 100vw; */
     }
 }
