@@ -46,6 +46,18 @@ a {
 .frame {
     margin: 15px 20px 0px 20px;
 }
+.del-img {
+    width: 60%;
+}
+.frame button {
+    color: #ddd;
+    font-weight: bolder;
+    background: darkred;
+    border: none;
+    padding: 5px 32px;
+    border-radius: 6px;
+    margin: 15px;
+}
 .frame img {
     width: 100%;
     background: #222;
@@ -117,5 +129,14 @@ a {
         width: 100%;
         padding: 10px;
         /* height: 100vw; */
+    }
+    .frame button {
+        color: #ddd;
+        font-weight: bolder;
+        background: darkred;
+        border: none;
+        padding: 10px 100px;
+        border-radius: 6px;
+        margin: 15px;
     }
 }

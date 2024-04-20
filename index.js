@@ -100,9 +100,9 @@ app.post('/upload-frames', upload.array('files', 10), async (req, res) => {
       const file = files[i];
 
       const newFile = new FramesFile({
-         filename: req.file.filename,
-         contentType: req.file.mimetype,
-         data: fs.readFileSync(req.file.path)
+         filename: file.filename,
+         contentType: file.mimetype,
+         data: fs.readFileSync(file.path)
        });
        await newFile.save();
        res.render('success');
@@ -446,9 +446,15 @@ app.get('/booking', (req, res) => {
    res.sendFile(path.join(__dirname, 'booking.html'))
 });
 
-app.get('/services', (req, res) => {
-   res.sendFile(path.join(__dirname, 'services.html'))
+app.get('/videos', (req, res) => {
+  res.sendFile(path.join(__dirname, 'videos.html'))
 });
+
+app.get('/services', (req, res) => {
+  res.sendFile(path.join(__dirname, 'services.html'))
+});
+
+// EJS
 
 app.get('/ifeoluwa-dashboard', (req, res) => {
    res.render('admin-page')
@@ -462,46 +468,82 @@ app.get('/category-delete', (req, res) => {
    res.render('category-delete')
 });
 
-app.get('/upload', (req, res) => {
-   res.render('upload-page')
-});
-
-app.get('/delete', (req, res) => {
-   res.render('delete-page')
-});
+// UPLOAD ROUTES
 
 app.get('/studio-upload', (req, res) => {
-   res.render('studio-upload');
+   res.render('upload-routes/studio-upload');
 });
 
 app.get('/event-upload', (req, res) => {
-   res.render('event-upload');
+   res.render('upload-routes/event-upload');
 });
 
 app.get('/traditional-upload', (req, res) => {
-   res.render('traditional-upload');
+   res.render('upload-routes/traditional-upload');
 });
 
 app.get('/creative-upload', (req, res) => {
-   res.render('creative-upload');
+   res.render('upload-routes/creative-upload');
 });
 
 app.get('/lifestyle-upload', (req, res) => {
-   res.render('lifestyle-upload');
+   res.render('upload-routes/lifestyle-upload');
 });
 
 app.get('/product-upload', (req, res) => {
-   res.render('product-upload');
+   res.render('upload-routes/product-upload');
 });
 
 app.get('/frames-upload', (req, res) => {
-   res.render('frames-upload');
+   res.render('upload-routes/frames-upload');
 });
 
 app.get('/kids-upload', (req, res) => {
-   res.render('kids-upload');
+   res.render('upload-routes/kids-upload');
 });
-// end of routes
+
+app.get('/videos-upload', (req, res) => {
+  res.render('upload-routes/videos-upload');
+});
+// END OF UPLOAD ROUTES
+
+// DELETE ROUTES
+app.get('/studio-delete', (req, res) => {
+  res.render('delete-routes/studio-delete');
+});
+
+app.get('/event-delete', (req, res) => {
+  res.render('delete-routes/event-delete');
+});
+
+app.get('/traditional-delete', (req, res) => {
+  res.render('delete-routes/traditional-delete');
+});
+
+app.get('/creative-delete', (req, res) => {
+  res.render('delete-routes/creative-delete');
+});
+
+app.get('/lifestyle-delete', (req, res) => {
+  res.render('delete-routes/lifestyle-delete');
+});
+
+app.get('/product-delete', (req, res) => {
+  res.render('delete-routes/product-delete');
+});
+
+app.get('/frames-delete', (req, res) => {
+  res.render('delete-routes/frames-delete');
+});
+
+app.get('/kids-delete', (req, res) => {
+  res.render('delete-routes/kids-delete');
+});
+
+app.get('/videos-delete', (req, res) => {
+ res.render('delete-routes/videos-delete');
+});
+// END OF DELETE ROUTES
 
 app.listen(PORT, (req, res) => {
      console.log('server running....')

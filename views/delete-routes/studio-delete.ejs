@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <title>DELETE STUDIO FILES</title>
+  <link rel="stylesheet" href="gallery.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Scribble&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+    <meta charset="UTF-8">
+  </head> 
+  <body>
+    <div class="header-div">
+        <h4>STUDIO MEDIA FILES</h4>
+    </div>
+    <p class="pp">Delete any below</p>
+    <div class="creative-gallery">
+      <div class="centered imgs">
+         <div class="frame frame-3">
+            <img src="ife-logo.png" alt="">
+            <div class="centered"><button>Delete</button></div>
+         </div>
+      </div>
+    </div>
+    <p class="the-end">~ END OF GALLERY ~</p>
+    <div id="event-images"></div>
+    <!-- <script>
+     fetch('/display-all-creative')
+       .then(response => response.json())
+       .then(imagesArray => {
+        let accum = '';
+         const imagesFrame = document.querySelector('.frame-3');
+         imagesArray.forEach(imageData => {
+           const img = document.createElement('img');
+           img.src = `data:${imageData.contentType};base64,${imageData.data}`;
+           img.alt = imageData.filename;
+           imagesFrame.appendChild(img);
+         });
+       })
+       .catch(error => console.error(error));
+    </script> -->
+  </body>
+  </html>
