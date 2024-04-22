@@ -508,6 +508,7 @@ app.get('/videos-upload', (req, res) => {
 // END OF UPLOAD ROUTES
 
 // DELETE ROUTES
+
 app.get('/studio-delete', (req, res) => {
   res.render('delete-routes/studio-delete');
 });

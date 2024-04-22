@@ -43,9 +43,17 @@ a {
     display: flex;
     justify-content: center;
 }
+.btn-div {
+    background: green;
+    display: none;
+}
 .frame {
     margin: 15px 20px 0px 20px;
     padding-right: 17px;
+    /* display: grid;
+    grid-template-columns: auto;
+    justify-content: center;
+    align-items: center; */
 }
 .creative-gallery {
     padding-right: 20px;
