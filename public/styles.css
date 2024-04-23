@@ -16,6 +16,13 @@ a {
     color: currentColor;
     text-decoration: none;
 }
+.bg-camera {
+    position: absolute;
+    width: 25%;
+    top: 65%;
+    right: 5%;
+    margin: 15px;
+}
 .header-div {
     margin: 15px;
     background: #0a0a0a;
@@ -239,6 +246,9 @@ footer h4 {
     font-family: "Poppins", sans-serif;
     padding: 10px;
     margin: 10px;
+}
+.sec-services, .bottom {
+    background: url(images/bg-cam.jpg);
 }
 .services {
     font-family: "Poppins", sans-serif;

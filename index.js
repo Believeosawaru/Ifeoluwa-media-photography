@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const fs = require('fs');
 const { rejects } = require('assert');
+const bodyParser = require('body-parser');
 const router = express.Router()
 
 const app = express();
@@ -19,7 +20,6 @@ const storage = multer.diskStorage({
  });
 
  const upload = multer({ storage: storage });
-
 
  // forms validation
 
@@ -107,7 +107,7 @@ app.post('/upload-frames', upload.array('files', 10), async (req, res) => {
        await newFile.save();
        res.render('success');
      }
-   })
+})
 
  app.post('/upload-kids', upload.single('file'), async (req, res) => {
    const newFile = new KidsFile({
@@ -400,6 +400,7 @@ app.post('/upload-frames', upload.array('files', 10), async (req, res) => {
 
  app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json())
 
 // routes
 app.get('/', (req, res) => {
@@ -427,7 +428,7 @@ app.get('/kids-image', (req, res) => {
 });
 
 app.get('/lifestyle-image', (req, res) => {
-   res.sendFile(path.join(__dirname, 'lifestyle-image.html'))
+   res.sendFile(path.join(__dirname, 'lifestyle-image.html'));
 });
 
 app.get('/photoshoot-image', (req, res) => {
@@ -508,6 +509,30 @@ app.get('/videos-upload', (req, res) => {
 // END OF UPLOAD ROUTES
 
 // DELETE ROUTES
+// Endpoint to delete an image by filename
+app.delete('/delete-image/:filename', async (req, res) => {
+  const { filename } = req.params;
+
+  try {
+    // Find the image by filename in the database
+    const image = await StudioFile.findOne({ filename });
+
+    if (!image) {
+      return res.status(404).json({ error: 'Image not found' });
+    }
+
+    // Delete the image from the database
+    await image.remove();
+
+    // Delete the file from storage (assuming it's stored on disk)
+    fs.unlinkSync(`uploads/${filename}`);
+
+    res.status(200).json({ message: 'Image deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 app.get('/studio-delete', (req, res) => {
   res.render('delete-routes/studio-delete');

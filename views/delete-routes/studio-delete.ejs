@@ -15,35 +15,38 @@
         <h4>STUDIO MEDIA FILES</h4>
     </div>
     <p class="pp">Delete any below</p>
-    <div class="creative-gallery">
+    <div class="photoshoot-gallery">
       <div class="centered imgs">
-         <div class="frame del-1-frame">
-         </div>
+          <div class="frame frame-2">
+          </div>
       </div>
-    </div>
-    <p class="the-end">~ END OF GALLERY ~</p>
-    <div id="event-images"></div>
-    <script>
-     fetch('/display-all-studio')
-       .then(response => response.json())
-       .then(imagesArray => {
-        let accum = '';
-         const imagesFrame = document.querySelector('.del-1-frame');
-         imagesArray.forEach(imageData => {
-           const img = document.createElement('img');
-           const btn = document.createElement('button');
-           const div = document.createElement('div');
-           div.style.display = 'flex';
-           div.style.justifyContent = 'center'
-           img.src = `data:${imageData.contentType};base64,${imageData.data}`;
-           img.alt = imageData.filename;
-           imagesFrame.appendChild(img);
-           btn.innerHTML = 'Delete';
-           div.appendChild(btn);
-           imagesFrame.appendChild(div);
-         });
-       })
-       .catch(error => console.error(error));
-    </script>
+  </div>
+  <p class="the-end">~ END OF GALLERY ~</p>
+  <div id="event-images"></div>
+  
+  <script>
+      fetch('/display-all-studio')
+          .then(response => response.json())
+          .then(imagesArray => {
+              const imagesFrame = document.querySelector('.frame');
+              imagesArray.forEach(imageData => {
+                  const imgContainer = document.createElement('div');
+                  imgContainer.classList.add('image-container');
+  
+                  const img = document.createElement('img');
+                  img.src = `data:${imageData.contentType};base64,${imageData.data}`;
+                  img.alt = imageData.filename;
+  
+                  const deleteBtn = document.createElement('button');
+                  deleteBtn.textContent = 'Delete';
+                  deleteBtn.addEventListener('click', () => deleteImage(imageData.filename));
+  
+                  imgContainer.appendChild(img);
+                  imgContainer.appendChild(deleteBtn);
+                  imagesFrame.appendChild(imgContainer);
+              });
+          })
+          .catch(error => console.error(error));
+  </script>
   </body>
   </html>
