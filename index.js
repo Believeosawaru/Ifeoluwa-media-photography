@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const { rejects } = require('assert');
 const bodyParser = require('body-parser');
-const router = express.Router()
+const router = express.Router();
 
 const app = express();
 const PORT = process.env.PORT || 3000;

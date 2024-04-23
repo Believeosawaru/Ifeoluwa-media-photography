@@ -3,7 +3,10 @@
     margin: 0;
 }
 body {
-    background: black;
+    background: url(images/body-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
     color: white;
 }
 body::-webkit-scrollbar {
