@@ -250,7 +250,7 @@ footer h4 {
     padding: 10px;
     margin: 10px;
 }
-.sec-services, .bottom {
+.sec-services, .bottom, footer {
     background: url(images/bg-cam.jpg);
 }
 .services {
