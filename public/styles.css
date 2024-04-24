@@ -3,10 +3,11 @@
     margin: 0;
 }
 body {
-    background: url(images/body-bg.jpg);
+    /* background: url(images/body-bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: right;
+    background-position: right; */
+    background: rgba(0, 0, 0, .9);
     color: white;
 }
 body::-webkit-scrollbar {
@@ -103,7 +104,7 @@ a {
 button:hover {
    cursor: pointer;
 }
-.booking-btn, .gallery-btn, .others-btn {
+.booking-btn, .gallery-btn, .others-btn, .bottom-btn {
     background: rgb(214, 170, 47);
     color: black;
     padding: 5px 20px;
@@ -331,7 +332,26 @@ footer h4 {
     margin: 10px 0px;
 }
 /* admin dashboard */
-
+.admin-img {
+    margin: 15px;
+    width: 90%;
+    border-radius: 4px;
+}
+.about-staff {
+    margin-top: 10px;
+    line-height: 1.7em;
+    font-family: "Poppins", sans-serif;
+}
+.dark-fade-admin {
+    background: rgba(0, 0, 0, .9);
+    width: 93%;
+    height: 50px;
+    margin: -50px 10px 15px 10px;
+    position: absolute;
+    font-family: "Poppins", sans-serif;
+    padding-top: 10px;
+    font-weight: bold;
+}
 .update-div {
     border: 1px solid #222;
     width: 100%;

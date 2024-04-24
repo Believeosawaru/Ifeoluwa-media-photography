@@ -423,6 +423,10 @@ app.get('/gallery', (req, res) => {
    res.sendFile(path.join(__dirname, 'gallery.html'))
 });
 
+app.get('/about', (req, res) => {
+  res.sendFile(path.join(__dirname, 'about.html'))
+});
+
 app.get('/kids-image', (req, res) => {
    res.sendFile(path.join(__dirname, 'kids-image.html'))
 });
