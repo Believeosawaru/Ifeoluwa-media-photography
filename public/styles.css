@@ -7,7 +7,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: right; */
-    background: rgba(0, 0, 0, .9);
+    background: black;
     color: white;
 }
 body::-webkit-scrollbar {
