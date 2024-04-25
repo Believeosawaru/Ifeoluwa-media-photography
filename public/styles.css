@@ -144,6 +144,13 @@ section h4 {
 .social-logos {
     margin: 15px;
 }
+#admin-social {
+    margin-top: -30px;
+}
+#admin-social img {
+    border-radius: 50%;
+    margin: 0px;
+}
 .services-list {
     font-family: "Poppins", sans-serif;
     font-size: 14px;
