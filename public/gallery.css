@@ -3,7 +3,7 @@
     margin: 0;
 }
 body {
-    background: #0a0a0a;
+    background: black;
     color: white;
 }
 body::-webkit-scrollbar {
@@ -109,6 +109,13 @@ a {
     margin: 15px;
     font-family: "Poppins", sans-serif;
     font-weight: bold;
+}
+.margin-bttm {
+    margin-bottom: 10px;
+}
+.videos {
+    border: 1px solid white;
+    border-radius: 8px;
 }
 @media screen and (min-width: 1200px) {
     .header-div {
