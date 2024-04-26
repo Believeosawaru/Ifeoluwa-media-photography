@@ -15,36 +15,35 @@
     <div class="header-div">
         <h4>VIDEOS</h4>
     </div>
-    <p class="pp margin-bttm">View our collection below</p>
-    <div class="centered">
-      <video class="videos" width="320" height="240" controls>
-        <source src="video/video-1.mp4" type="video/mp4">
-        your browser does not support the video tag
-      </video>
-    </div>
-
-    <!-- <div class="event-gallery">
-      <div class="centered imgs">
-         <div class="frame frame-7">
+    <p class="pp">View our collection below</p>
+    <div class="videos-gallery">
+         <div class="frame frame-videos">
          </div>
-      </div>
     </div>
     <p class="the-end">~ END OF GALLERY ~</p>
-    <div id="event-images"></div>
+
     <script>
-     fetch('/display-all-product')
+     fetch('/display-all-videos')
        .then(response => response.json())
-       .then(imagesArray => {
-        let accum = '';
-         const imagesFrame = document.querySelector('.frame-7');
-         imagesArray.forEach(imageData => {
-           const img = document.createElement('img');
-           img.src = `data:${imageData.contentType};base64,${imageData.data}`;
-           img.alt = imageData.filename;
-           imagesFrame.appendChild(img);
+       .then(videosArray => {
+         const videosFrame = document.querySelector('.frame-videos');
+         videosArray.forEach(videoData => {
+           const video = document.createElement('video');
+           video.src = `data:${videoData.contentType};base64,${videoData.data}`;
+           video.class = 'videos'
+           video.controls = true;
+           videosFrame.appendChild(video);
+           console.log('successful')
          });
        })
        .catch(error => console.error(error));
-    </script> -->
+    </script>
   </body>
   </html>
+
+
+
+  <!--  <video class="videos" width="320" height="240" controls>
+        <source src="video/video-1.mp4" type="video/mp4">
+        your browser does not support the video tag
+      </video> -->

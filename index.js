@@ -21,7 +21,6 @@ const storage = multer.diskStorage({
 
  const upload = multer({ storage: storage });
 
- // forms validation
 
  app.post('/upload-studio', upload.single('file'), async (req, res) => {
    const newFile = new StudioFile({
@@ -118,6 +117,16 @@ app.post('/upload-frames', upload.array('files', 10), async (req, res) => {
    await newFile.save();
    res.render('success');
  });
+
+ app.post('/upload-videos', upload.single('file'), async (req, res) => {
+  const newFile = new Videos({
+    filename: req.file.filename,
+    contentType: req.file.mimetype,
+    data: fs.readFileSync(req.file.path)
+  });
+  await newFile.save();
+  res.render('success');
+});
 
  app.get('/display-all-events', async (req, res) => {
    try {
@@ -375,6 +384,38 @@ app.post('/upload-frames', upload.array('files', 10), async (req, res) => {
 
  });
 
+ app.get('/display-all-videos', async (req, res) => {
+  try {
+     // retrieve files from db
+     const videoFiles = await Videos.find({});
+
+     // check if there are any event files
+     if (videoFiles.length === 0) {
+        return
+     }
+
+     // create an array to store images
+     const videoArray = [];
+
+         // Iterate over each event file
+     videoFiles.forEach(videoFile => {
+     // Push image data to the array
+     videoArray.push({
+       filename: videoFile.filename,
+       contentType: videoFile.contentType,
+       data: videoFile.data.toString('base64') // Convert Buffer to base64 string
+     });
+  });
+
+   // Send the array of image data to the client
+   res.json(videoArray);
+ } catch (error) {
+   console.error(error);
+   res.status(500).send('Internal Server Error');
+ }
+
+});
+
 
  mongoose.connect('mongodb+srv://believeosawaru2:ife@cluster0.klrtwxd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
    console.log('connected to database');
@@ -397,6 +438,7 @@ app.post('/upload-frames', upload.array('files', 10), async (req, res) => {
  const ProductFile = mongoose.model('product', Schema);
  const FramesFile = mongoose.model('frames', Schema);
  const KidsFile = mongoose.model('kids', Schema);
+ const Videos = mongoose.model('video', Schema);
 
  app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')));

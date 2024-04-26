@@ -47,6 +47,18 @@ a {
     background: green;
     display: none;
 }
+.frame-videos {
+    display: grid;
+    grid-template-columns: auto;
+    padding: 0px 10px;
+}
+.frame-videos video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: 1px solid white;
+    border-radius: 6px;
+    margin-top: 10px;
+}
 .frame {
     margin: 15px 20px 0px 20px;
     padding-right: 17px;
@@ -113,10 +125,6 @@ a {
 .margin-bttm {
     margin-bottom: 10px;
 }
-.videos {
-    border: 1px solid white;
-    border-radius: 8px;
-}
 @media screen and (min-width: 1200px) {
     .header-div {
         margin: 15px 270px 15px 270px;
@@ -139,6 +147,10 @@ a {
         border-radius: 6px;
         margin: 0px 270px 0px 270px;
         font-weight: 200;
+    }
+    .videos-gallery video {
+        width: 30px;
+        height: 30px;
     }
     .frame {
         margin: 20px 270px;
