@@ -556,27 +556,49 @@ app.get('/videos-upload', (req, res) => {
 
 // DELETE ROUTES
 // Endpoint to delete an image by filename
-app.delete('/delete-image/:filename', async (req, res) => {
-  const { filename } = req.params;
+app.delete('/delete-video/:filename', async (req, res) => {
+  const filename = req.params.filename;
 
   try {
-    // Find the image by filename in the database
-    const image = await StudioFile.findOne({ filename });
+    const videos = await Videos.findOneAndDelete({ filename: filename }).then(res.render('successful-del'))
 
-    if (!image) {
-      return res.status(404).json({ error: 'Image not found' });
+    if (!videos) {
+      return res.status(404).send('Video not found');
     }
-
-    // Delete the image from the database
-    await image.remove();
-
-    // Delete the file from storage (assuming it's stored on disk)
-    fs.unlinkSync(`uploads/${filename}`);
-
-    res.status(200).json({ message: 'Image deleted successfully' });
+    console.log(videos)
+    // await videos.remove((err) => {
+    //   if (err) { console.error(err) } 
+    //   else {
+    //     res.render('successful-del')
+    //   }
+    // });
+    // console.log(videos.remove())
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(404).send('Internal server error');
+  }
+});
+
+app.delete('/delete-studio/:filename', async (req, res) => {
+  const filename = req.params.filename;
+
+  try {
+    const studio = StudioFile.findOne({ filename: '1714130310565-video-1.mp4' });
+
+    if (!studio) {
+      return res.status(404).send('Image not found');
+    }
+    studio.remove()
+    // await videos.remove((err) => {
+    //   if (err) { console.error(err) } 
+    //   else {
+    //     res.render('successful-del')
+    //   }
+    // });
+    // console.log(videos.remove())
+  } catch (error) {
+    console.error(error)
+    res.status(404).send('Internal server error')
   }
 });
 

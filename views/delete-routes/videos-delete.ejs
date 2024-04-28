@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>VIEW OUR VIDEOS</title>
+  <link rel="stylesheet" href="gallery.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Scribble&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Londrina+Outline&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <div class="header-div">
+        <h4>VIDEOS</h4>
+    </div>
+    <p class="pp">View our collection below</p>
+    <div class="videos-gallery">
+         <div class="frame frame-videos">
+         </div>
+    </div>
+    <p class="the-end">~ END OF GALLERY ~</p>
+
+    <script>
+    function deleteVideo(filename) {
+        fetch(`/delete-video/${filename}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                res.render('successful-del')
+            } else {
+                console.error('Failed to delete video')
+            }
+        })
+        .catch(error => console.error(error));
+    }
+
+     fetch('/display-all-videos')
+       .then(response => response.json())
+       .then(videosArray => {
+         const videosFrame = document.querySelector('.frame-videos');
+         videosArray.forEach(videoData => {
+            const deleteButton = document.createElement('button');
+           deleteButton.textContent = 'Delete';
+           deleteButton.addEventListener('click', () => {
+           deleteVideo(videoData.filename);
+           });
+
+           const video = document.createElement('video');
+           video.src = `data:${videoData.contentType};base64,${videoData.data}`;
+           video.class = 'videos'
+           video.controls = true;
+           video.setAttribute('data-filename', videoData.filename)
+           videosFrame.appendChild(video);
+           videosFrame.appendChild(deleteButton);
+         });
+       })
+       .catch(error => console.error(error));
+    </script>
+  </body>
+  </html>

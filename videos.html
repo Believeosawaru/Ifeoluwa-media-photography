@@ -32,8 +32,15 @@
            video.src = `data:${videoData.contentType};base64,${videoData.data}`;
            video.class = 'videos'
            video.controls = true;
+           video.setAttribute('data-filename', videoData.filename)
            videosFrame.appendChild(video);
-           console.log('successful')
+
+           const deleteButton = document.createElement('button');
+           deleteButton.textContent = 'Delete';
+           deleteButton.addEventListener('click', () => {
+           deleteVideo(videoData.filename);
+           videosFrame.appendChild(deleteButton);
+           })
          });
        })
        .catch(error => console.error(error));

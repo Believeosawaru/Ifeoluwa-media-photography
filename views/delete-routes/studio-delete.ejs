@@ -25,6 +25,21 @@
   <div id="event-images"></div>
   
   <script>
+        function deleteImage(filename) {
+        fetch(`/delete-studio/${filename}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                res.render('successful-del')
+            } else {
+                console.error('Failed to delete video')
+            }
+        })
+        .catch(error => console.error(error));
+    }
+
+
       fetch('/display-all-studio')
           .then(response => response.json())
           .then(imagesArray => {
@@ -36,6 +51,7 @@
                   const img = document.createElement('img');
                   img.src = `data:${imageData.contentType};base64,${imageData.data}`;
                   img.alt = imageData.filename;
+                  img.setAttribute('data-filename', imageData.filename);
   
                   const deleteBtn = document.createElement('button');
                   deleteBtn.textContent = 'Delete';
