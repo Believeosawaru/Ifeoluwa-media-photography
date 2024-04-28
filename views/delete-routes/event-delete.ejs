@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <title>DELETE TRADITIONAL FILES</title>
+  <title>DELETE EVENT FILES</title>
   <link rel="stylesheet" href="gallery.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,7 @@
   </head> 
   <body>
     <div class="header-div">
-        <h4>TRADITIONAL MEDIA FILES</h4>
+        <h4>EVENT MEDIA FILES</h4>
     </div>
     <p class="pp">Delete any below</p>
     <div class="photoshoot-gallery">
@@ -40,7 +40,7 @@
     }
 
 
-      fetch('/display-all-event')
+      fetch('/display-all-events')
           .then(response => response.json())
           .then(imagesArray => {
               const imagesFrame = document.querySelector('.frame-8');
