@@ -515,6 +515,10 @@ app.get('/category-delete', (req, res) => {
    res.render('category-delete')
 });
 
+app.get('/successful-del', (req, res) => {
+  res.render('successful-del')
+});
+
 // UPLOAD ROUTES
 
 app.get('/studio-upload', (req, res) => {
@@ -555,52 +559,136 @@ app.get('/videos-upload', (req, res) => {
 // END OF UPLOAD ROUTES
 
 // DELETE ROUTES
-// Endpoint to delete an image by filename
-app.delete('/delete-video/:filename', async (req, res) => {
+
+app.delete('/delete-studio/:filename', async (req, res) => {
   const filename = req.params.filename;
 
   try {
-    const videos = await Videos.findOneAndDelete({ filename: filename }).then(res.render('successful-del'))
+    const studio = await StudioFile.findOneAndDelete({ filename: filename })
 
-    if (!videos) {
-      return res.status(404).send('Video not found');
+    if (!studio) {
+      return res.status(404).send('Image not found');
     }
-    console.log(videos)
-    // await videos.remove((err) => {
-    //   if (err) { console.error(err) } 
-    //   else {
-    //     res.render('successful-del')
-    //   }
-    // });
-    // console.log(videos.remove())
+    
   } catch (error) {
     console.error(error);
     res.status(404).send('Internal server error');
   }
 });
 
-app.delete('/delete-studio/:filename', async (req, res) => {
+app.delete('/delete-event/:filename', async (req, res) => {
   const filename = req.params.filename;
 
   try {
-    const studio = StudioFile.findOne({ filename: '1714130310565-video-1.mp4' });
+    const event = await EventFile.findOneAndDelete({ filename: filename })
 
-    if (!studio) {
+    if (!event) {
       return res.status(404).send('Image not found');
     }
-    studio.remove()
-    // await videos.remove((err) => {
-    //   if (err) { console.error(err) } 
-    //   else {
-    //     res.render('successful-del')
-    //   }
-    // });
-    // console.log(videos.remove())
+    
   } catch (error) {
-    console.error(error)
-    res.status(404).send('Internal server error')
+    console.error(error);
+    res.status(404).send('Internal server error');
   }
 });
+
+app.delete('/delete-traditional/:filename', async (req, res) => {
+  const filename = req.params.filename;
+
+  try {
+    const traditional = await TraditionalFile.findOneAndDelete({ filename: filename })
+
+    if (!traditional) {
+      return res.status(404).send('Image not found');
+    }
+    
+  } catch (error) {
+    console.error(error);
+    res.status(404).send('Internal server error');
+  }
+});
+
+app.delete('/delete-creative/:filename', async (req, res) => {
+  const filename = req.params.filename;
+
+  try {
+    const creative = await CreativeFile.findOneAndDelete({ filename: filename })
+
+    if (!creative) {
+      return res.status(404).send('Image not found');
+    }
+    
+  } catch (error) {
+    console.error(error);
+    res.status(404).send('Internal server error');
+  }
+});
+
+app.delete('/delete-product/:filename', async (req, res) => {
+  const filename = req.params.filename;
+
+  try {
+    const product = await ProductFile.findOneAndDelete({ filename: filename })
+
+    if (!product) {
+      return res.status(404).send('Image not found');
+    }
+    
+  } catch (error) {
+    console.error(error);
+    res.status(404).send('Internal server error');
+  }
+});
+
+app.delete('/delete-frames/:filename', async (req, res) => {
+  const filename = req.params.filename;
+
+  try {
+    const frames = await FramesFile.findOneAndDelete({ filename: filename })
+
+    if (!frames) {
+      return res.status(404).send('Images not found');
+    }
+    
+  } catch (error) {
+    console.error(error);
+    res.status(404).send('Internal server error');
+  }
+});
+
+app.delete('/delete-kids/:filename', async (req, res) => {
+  const filename = req.params.filename;
+
+  try {
+    const kids = await KidsFile.findOneAndDelete({ filename: filename })
+
+    if (!kids) {
+      return res.status(404).send('Video not found');
+    }
+    
+  } catch (error) {
+    console.error(error);
+    res.status(404).send('Internal server error');
+  }
+});
+
+app.delete('/delete-video/:filename', async (req, res) => {
+  const filename = req.params.filename;
+
+  try {
+    const videos = await Videos.findOneAndDelete({ filename: filename })
+
+    if (!videos) {
+      return res.status(404).send('Video not found');
+    }
+
+  } catch (error) {
+    console.error(error);
+    res.status(404).send('Internal server error');
+  }
+});
+
+
 
 app.get('/studio-delete', (req, res) => {
   res.render('delete-routes/studio-delete');

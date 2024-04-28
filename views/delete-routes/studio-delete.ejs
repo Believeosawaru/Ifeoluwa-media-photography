@@ -31,7 +31,7 @@
         })
         .then(response => {
             if (response.ok) {
-                res.render('successful-del')
+                window.location.href = '/successful-del'
             } else {
                 console.error('Failed to delete video')
             }
