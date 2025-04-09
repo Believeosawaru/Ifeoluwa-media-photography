@@ -444,7 +444,7 @@ app.get("/display-all-videos", async (req, res) => {
 
 app.post("/send-otp", async (req, res) => {
   try {
-    const otp = await sendOtpEmail("believeosawaru@gmail.com");
+    const otp = await sendOtpEmail("ifemediastudio@gmail.com");
 
     res.status(200).json(otp);
   } catch (error) {
